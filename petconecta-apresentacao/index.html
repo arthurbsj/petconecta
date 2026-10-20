@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PetConecta - Apresentação</title>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600;700&family=Manrope:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+  <header id="topo"></header>
+
+  <main>
+    <section id="tela-meu" class="tela">
+      <!-- ===== TELA: MEU PET (área do dono) ===== -->
+      <section id="login-meu"></section>
+
+      <div id="conteudo-meu" class="conteudo" hidden>
+
+        <!-- Escolha do pet e estado de segurança -->
+        <div class="card barra">
+          <label>Meu pet
+            <select id="selPet"></select>
+          </label>
+          <span id="estado" class="selo" role="status"></span>
+        </div>
+
+        <div class="duas">
+          <!-- Mapa -->
+          <div class="card">
+            <div id="mapa"></div>
+          </div>
+
+          <div class="coluna">
+            <div class="card">
+              <h2>Situação</h2>
+              <dl id="metricas"></dl>
+              <div id="chegar"></div>
+            </div>
+
+            <div class="card">
+              <h2>Simulador GPS (fictício)</h2>
+              <div class="botoes">
+                <button id="bIniciar" class="btn">Iniciar simulação</button>
+                <button id="bFuga" class="btn perigo">Simular fuga</button>
+                <button id="bVolta" class="btn claro">Fazer voltar</button>
+                <button id="bCasa" class="btn claro">Reiniciar em casa</button>
+              </div>
+              <label>Raio de segurança: <output id="oRaio"></output>
+                <input id="raio" type="range" min="50" max="1000" step="25">
+              </label>
+              <label>Velocidade da simulação
+                <select id="vel">
+                  <option value="1">1x</option>
+                  <option value="2">2x</option>
+                  <option value="5">5x</option>
+                  <option value="10">10x</option>
+                </select>
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <h2>Histórico demonstrativo</h2>
+          <ul id="hist" class="lista"></ul>
+          <p><button id="bLimpar" class="btn claro">Limpar histórico</button></p>
+        </div>
+      </div>
+    </section>
+
+    <section id="tela-catalogo" class="tela" hidden>
+      <!-- ===== TELA: CATÁLOGO DE ADOÇÃO (pública) ===== -->
+      <div class="conteudo">
+        <div class="card">
+          <h1>Catálogo de adoção</h1>
+          <p class="nota">Animais fictícios para demonstração.</p>
+
+          <div class="barra">
+            <label>Buscar <input id="busca" placeholder="Nome ou raça"></label>
+            <label>Espécie
+              <select id="especie"><option value="">Todas</option><option>Cachorro</option><option>Gato</option></select>
+            </label>
+            <label>Porte
+              <select id="porte"><option value="">Todos</option><option>Pequeno</option><option>Médio</option><option>Grande</option></select>
+            </label>
+            <label>Sexo
+              <select id="sexo"><option value="">Todos</option><option>Macho</option><option>Fêmea</option></select>
+            </label>
+            <label>Idade
+              <select id="idade">
+                <option value="">Todas</option>
+                <option value="filhote">Filhote (até 1 ano)</option>
+                <option value="adulto">Adulto</option>
+                <option value="senior">Sênior (8+ anos)</option>
+              </select>
+            </label>
+            <label>Situação
+              <select id="situacao">
+                <option value="disponivel">Disponíveis</option>
+                <option value="analise">Em análise</option>
+                <option value="">Todas</option>
+              </select>
+            </label>
+            <label><span><input type="checkbox" id="soFavoritos"> Só favoritos</span></label>
+            <button id="limparFiltros" class="btn claro">Limpar filtros</button>
+          </div>
+
+          <p id="quantidade" role="status"></p>
+        </div>
+
+        <div id="lista" class="grade"></div>
+      </div>
+    </section>
+
+    <section id="tela-ong" class="tela" hidden>
+      <!-- ===== TELA: ÁREA DA ONG ===== -->
+      <section id="login-ong"></section>
+
+      <div id="conteudo-ong" class="conteudo" hidden>
+        <h1>Área da ONG</h1>
+
+        <!-- Números do painel -->
+        <div id="indicadores" class="indicadores"></div>
+
+        <div class="duas">
+          <div class="card">
+            <h2>Solicitações de adoção</h2>
+            <ul id="solicitacoes" class="lista"></ul>
+          </div>
+
+          <div class="coluna">
+            <div class="card">
+              <h2>Acompanhamento pós-adoção</h2>
+              <p class="nota">Última leitura do GPS simulado.</p>
+              <ul id="acompanhamento" class="lista"></ul>
+            </div>
+            <div class="card">
+              <h2>Atividades recentes</h2>
+              <ul id="atividades" class="lista"></ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tutores e contatos periódicos -->
+        <div class="card">
+          <h2>Tutores e contatos periódicos <span id="tutAtrasados" class="selo atrasado" hidden></span></h2>
+          <p class="nota">Dados fictícios. Defina de quantos em quantos dias a ONG deve contatar cada tutor;
+            o sino 🔔 avisa quando o contato estiver atrasado.</p>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr>
+                  <th>Animal</th><th>Tutor e contato</th><th>Intervalo</th>
+                  <th>Último contato</th><th>Próximo contato</th><th>Ações</th>
+                </tr>
+              </thead>
+              <tbody id="tabelaTutores"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Cadastro de animais -->
+        <div class="card">
+          <div class="barra">
+            <h2>Animais cadastrados</h2>
+            <button id="botaoNovoAnimal" class="btn ouro">Cadastrar animal</button>
+          </div>
+          <div style="overflow:auto">
+            <table>
+              <thead>
+                <tr><th>Nome</th><th>Espécie</th><th>Raça</th><th>Idade</th><th>Situação</th><th>Ações</th></tr>
+              </thead>
+              <tbody id="tabelaAnimais"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer></footer>
+
+  <!-- Scripts: a ordem importa (config e serviços primeiro, telas por último) -->
+  <script src="js/config.js"></script>
+  <script src="js/servicos/armazenamento.js"></script>
+  <script src="js/servicos/auth-service.js"></script>
+  <script src="js/servicos/pet-service.js"></script>
+  <script src="js/servicos/dados-service.js"></script>
+  <script src="js/servicos/tutor-service.js"></script>
+  <script src="js/nucleo/regras.js"></script>
+  <script src="js/ui/componentes.js"></script>
+  <script src="js/ui/layout.js"></script>
+  <script src="js/ui/login.js"></script>
+  <script src="js/gps/simulador-gps.js"></script>
+  <script src="js/ui/mapa.js"></script>
+  <script src="js/paginas/meu-pet.js"></script>
+  <script src="js/paginas/catalogo.js"></script>
+  <script src="js/paginas/ong-tutores.js"></script>
+  <script src="js/paginas/ong.js"></script>
+
+  <script>
+    // 1) monta cabeçalho e menu (modo: as 3 telas na mesma página)
+    PC.layout.montar("apresentacao");
+
+    // 2) inicia cada tela (Meu Pet e ONG pedem o login fictício antes)
+    PC.login.exigir({ perfil: "dono", telaLogin: "login-meu", telaConteudo: "conteudo-meu", aoEntrar: PC.paginas.meu });
+    PC.paginas.catalogo();
+    PC.login.exigir({ perfil: "ong", telaLogin: "login-ong", telaConteudo: "conteudo-ong", aoEntrar: PC.paginas.ong });
+  </script>
+</body>
+</html>
